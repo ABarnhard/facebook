@@ -32,9 +32,11 @@ describe('User', function(){
   describe('.updateProfile', function(){
     it('should add profile properties to the user object', function(done){
       var u = new User(),
-          data = {name:'test'};
+          data = {name:'test', visible:'private', empty:'  '};
       User.updateProfile(u, data, function(){
         expect(u.name).to.equal('test');
+        expect(u.isPublic).to.equal(false);
+        expect(u.empty).to.be.undefined;
         done();
       });
     });
