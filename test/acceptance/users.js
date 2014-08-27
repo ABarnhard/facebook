@@ -117,5 +117,19 @@ describe('users', function(){
     });
   });
 
+  describe('post /message/userId', function(){
+    it('should send a text message to recipient', function(done){
+      request(app)
+      .post('/message/000000000000000000000003')
+      .send('mtype=text&message=hey')
+      .set('cookie', cookie)
+      .end(function(err, res){
+        expect(res.status).to.equal(302);
+        expect(res.headers.location).to.equal('/users/john@aol.com');
+        done();
+      });
+    });
+  });
+
 });
 
