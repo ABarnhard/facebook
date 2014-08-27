@@ -1,10 +1,10 @@
-## name of project
+## Facebook
 ### Code Badges
-build status icon
-coverage status icon
+[![Build Status](https://travis-ci.org/ABarnhard/facebook.svg)](https://travis-ci.org/ABarnhard/facebook)
+[![Coverage Status](https://coveralls.io/repos/ABarnhard/facebook/badge.png)](https://coveralls.io/r/ABarnhard/facebook)
 
 ### About
-write a description about your project
+This how Zuck did it?
 
 ### Models
 ```
