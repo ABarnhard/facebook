@@ -81,7 +81,8 @@ function sendText(to, body, cb){
       authToken = require('../static/token/twilio-auth'),
       //require the Twilio module and create a REST client
       client = require('twilio')(accountSid, authToken.token);
-
-  client.messages.create({to:to, from: '+13165411006', body: body}, cb);
+  if(to){
+    client.messages.create({to:to, from: '+13165411006', body: body}, cb);
+  }
 }
 
