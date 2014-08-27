@@ -55,3 +55,9 @@ exports.show = function(req, res){
   res.render('users/show');
 };
 
+exports.index = function(req, res){
+  User.findAllPublicUsers(function(err, users){
+    res.render('users/index', {users:users});
+  });
+};
+

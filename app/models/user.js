@@ -50,5 +50,9 @@ User.updateProfile = function(user, data, cb){
   User.collection.save(user, cb);
 };
 
+User.findAllPublicUsers = function(cb){
+  User.collection.find({isPublic:true}).toArray(cb);
+};
+
 module.exports = User;
 

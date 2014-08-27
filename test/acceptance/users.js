@@ -79,5 +79,20 @@ describe('users', function(){
     });
   });
 
+  describe('get /users', function(){
+    it('should show links to public user profiles', function(done){
+      request(app)
+      .get('/users')
+      .set('cookie', cookie)
+      .end(function(err, res){
+        expect(res.status).to.equal(200);
+        expect(res.text).to.not.include('Bob');
+        expect(res.text).to.include('John');
+        expect(res.text).to.not.include('Sue');
+        done();
+      });
+    });
+  });
+
 });
 

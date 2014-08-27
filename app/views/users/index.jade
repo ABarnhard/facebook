@@ -1,0 +1,18 @@
+extends ../shared/template
+block content
+  .panel.panel-default
+    .panel-body
+      .row
+        .col-xs-12
+          table.table
+            thead
+              tr
+                th Users:
+            tbody
+              each u in users
+                unless u.email === user.email
+                  tr
+                    td: a(href='/profile/#{u._id}')= u.name
+
+block scripts
+

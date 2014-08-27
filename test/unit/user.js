@@ -40,5 +40,14 @@ describe('User', function(){
     });
   });
 
+  describe('.findAllPublicUsers', function(){
+    it('should return all users who\'s profile is set to public', function(done){
+      User.findAllPublicUsers(function(err, users){
+        expect(users).to.have.length(2);
+        done();
+      });
+    });
+  });
+
 });
 
