@@ -28,5 +28,17 @@ describe('User', function(){
       expect(u).to.be.instanceof(User);
     });
   });
+
+  describe('.updateProfile', function(){
+    it('should add profile properties to the user object', function(done){
+      var u = new User(),
+          data = {name:'test'};
+      User.updateProfile(u, data, function(){
+        expect(u.name).to.equal('test');
+        done();
+      });
+    });
+  });
+
 });
 

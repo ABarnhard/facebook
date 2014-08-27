@@ -32,5 +32,23 @@ User.authenticate = function(o, cb){
   });
 };
 
+User.updateProfile = function(user, data, cb){
+  // console.log('***Post Body:', data);
+  Object.keys(data).forEach(function(key){
+    data[key] = data[key].trim();
+    if(data[key]){
+      switch(key){
+        case 'visible':
+          user.isPublic = (data[key] === 'public');
+          break;
+        default:
+          user[key] = data[key];
+      }
+    }
+  });
+  // console.log('*** Updated User:', user);
+  User.collection.save(user, cb);
+};
+
 module.exports = User;
 
