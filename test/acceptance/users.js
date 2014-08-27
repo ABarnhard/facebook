@@ -97,7 +97,7 @@ describe('users', function(){
   describe('get /users/email', function(){
     it('should return the profile page for a public profile', function(done){
       request(app)
-      .get('/profile/john@aol.com')
+      .get('/users/john@aol.com')
       .set('cookie', cookie)
       .end(function(err, res){
         expect(res.status).to.equal(200);
@@ -107,7 +107,7 @@ describe('users', function(){
     });
     it('should redirect away from private profile', function(done){
       request(app)
-      .get('/profile/sue@aol.com')
+      .get('/users/sue@aol.com')
       .set('cookie', cookie)
       .end(function(err, res){
         expect(res.status).to.equal(302);
