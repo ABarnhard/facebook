@@ -54,5 +54,9 @@ User.findAllPublicUsers = function(cb){
   User.collection.find({isPublic:true}).toArray(cb);
 };
 
+User.find = function(query, cb){
+  User.collection.findOne(query, cb);
+};
+
 module.exports = User;
 

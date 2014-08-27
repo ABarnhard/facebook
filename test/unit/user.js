@@ -51,5 +51,15 @@ describe('User', function(){
     });
   });
 
+  describe('.find', function(){
+    it('should return a user that matches passed in query', function(done){
+      User.find({email:'sue@aol.com'}, function(err, user){
+        expect(user).to.be.ok;
+        expect(user.name).to.equal('Sue');
+        done();
+      });
+    });
+  });
+
 });
 

@@ -94,5 +94,28 @@ describe('users', function(){
     });
   });
 
+  describe('get /users/email', function(){
+    it('should return the profile page for a public profile', function(done){
+      request(app)
+      .get('/profile/john@aol.com')
+      .set('cookie', cookie)
+      .end(function(err, res){
+        expect(res.status).to.equal(200);
+        expect(res.text).to.include('John');
+        done();
+      });
+    });
+    it('should redirect away from private profile', function(done){
+      request(app)
+      .get('/profile/sue@aol.com')
+      .set('cookie', cookie)
+      .end(function(err, res){
+        expect(res.status).to.equal(302);
+        expect(res.headers.location).to.equal('/users');
+        done();
+      });
+    });
+  });
+
 });
 

@@ -61,3 +61,13 @@ exports.index = function(req, res){
   });
 };
 
+exports.showProfile = function(req, res){
+  User.find({email:req.params.email, isPublic:true}, function(err, user){
+    if(!user){
+      res.redirect('/users');
+    }else{
+      res.render('users/show-user', {dispUser:user});
+    }
+  });
+};
+

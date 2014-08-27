@@ -12,7 +12,7 @@ block content
               each u in users
                 unless u.email === user.email
                   tr
-                    td: a(href='/profile/#{u._id}')= u.name
+                    td: a(href='/profile/#{u.email}')= u.name
 
 block scripts
 
