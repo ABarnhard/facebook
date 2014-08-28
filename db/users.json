@@ -1,6 +1,6 @@
 {
   "_id" : {"$oid":"000000000000000000000001"},
-  "email" : "bob@gmail.com",
+  "email" : "nodeapptest+bob@gmail.com",
   "password" : "$2a$10$XR.IQktUUujLBxed70GQn.jWY1wZ9ThM0Tar9wTqzkI4Uk1uP2Or2",
   "name" : "Bob",
   "phone" : "13166500346",
@@ -8,7 +8,7 @@
 }
 {
   "_id" : {"$oid":"000000000000000000000002"},
-  "email" : "sue@gmail.com",
+  "email" : "nodeapptest+sue@gmail.com",
   "password" : "$2a$10$sjPx9TkrEASeXzH6uuDCDO.n1Sj/H2A/bu/9hBFfm5fm3Z4LzrEPa",
   "name" : "Sue",
   "phone" : "13166500346",
@@ -16,7 +16,7 @@
 }
 {
   "_id" : {"$oid":"000000000000000000000003"},
-  "email" : "nodeapptest@gmail.com",
+  "email" : "nodeapptest+john@gmail.com",
   "password" : "$2a$10$XR.IQktUUujLBxed70GQn.jWY1wZ9ThM0Tar9wTqzkI4Uk1uP2Or2",
   "name" : "John",
   "phone" : "13166500346",

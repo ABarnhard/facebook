@@ -7,7 +7,7 @@ var expect    = require('chai').expect,
     User      = require('../../app/models/user'),
     dbConnect = require('../../app/lib/mongodb'),
     cp        = require('child_process'),
-    db        = 'template-test';
+    db        = 'facebook-test';
 
 describe('User', function(){
   before(function(done){
@@ -53,7 +53,7 @@ describe('User', function(){
 
   describe('.find', function(){
     it('should return a user that matches passed in query', function(done){
-      User.find({email:'sue@gmail.com'}, function(err, user){
+      User.find({email:'nodeapptest+sue@gmail.com'}, function(err, user){
         expect(user).to.be.ok;
         expect(user.name).to.equal('Sue');
         done();
