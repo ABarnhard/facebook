@@ -19,7 +19,7 @@ describe('users', function(){
     cp.execFile(__dirname + '/../scripts/clean-db.sh', [process.env.DB], {cwd:__dirname + '/../scripts'}, function(err, stdout, stderr){
       request(app)
       .post('/login')
-      .send('email=bob@aol.com')
+      .send('email=bob@gmail.com')
       .send('password=1234')
       .end(function(err, res){
         cookie = res.headers['set-cookie'][0];
@@ -35,7 +35,7 @@ describe('users', function(){
       .set('cookie', cookie)
       .end(function(err, res){
         expect(res.status).to.equal(200);
-        expect(res.text).to.include('bob@aol.com');
+        expect(res.text).to.include('bob@gmail.com');
         expect(res.text).to.include('Email');
         expect(res.text).to.include('Phone');
         expect(res.text).to.include('Visible');
@@ -97,7 +97,7 @@ describe('users', function(){
   describe('get /users/email', function(){
     it('should return the profile page for a public profile', function(done){
       request(app)
-      .get('/users/john@aol.com')
+      .get('/users/nodeapptest@gmail.com')
       .set('cookie', cookie)
       .end(function(err, res){
         expect(res.status).to.equal(200);
@@ -107,7 +107,7 @@ describe('users', function(){
     });
     it('should redirect away from private profile', function(done){
       request(app)
-      .get('/users/sue@aol.com')
+      .get('/users/sue@gmail.com')
       .set('cookie', cookie)
       .end(function(err, res){
         expect(res.status).to.equal(302);
@@ -125,7 +125,7 @@ describe('users', function(){
       .set('cookie', cookie)
       .end(function(err, res){
         expect(res.status).to.equal(302);
-        expect(res.headers.location).to.equal('/users/john@aol.com');
+        expect(res.headers.location).to.equal('/users/nodeapptest@gmail.com');
         done();
       });
     });
@@ -136,7 +136,7 @@ describe('users', function(){
       .set('cookie', cookie)
       .end(function(err, res){
         expect(res.status).to.equal(302);
-        expect(res.headers.location).to.equal('/users/john@aol.com');
+        expect(res.headers.location).to.equal('/users/nodeapptest@gmail.com');
         done();
       });
     });
