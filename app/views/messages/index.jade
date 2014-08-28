@@ -1,0 +1,22 @@
+extends ../shared/template
+block content
+  h2 Messages
+  .panel.panel-default
+    .panel-body
+      .row
+        .col-xs-12
+          table.table
+            thead
+              tr
+                th From
+                th Date
+                th Message
+            tbody
+              each message in messages
+                tr
+                  td: a(href='/users/#{message.fromEmail}')= message.fromName
+                  td= message.sent
+                  td= message.body
+
+block scripts
+

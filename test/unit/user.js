@@ -7,6 +7,7 @@ var expect    = require('chai').expect,
     User      = require('../../app/models/user'),
     dbConnect = require('../../app/lib/mongodb'),
     cp        = require('child_process'),
+    Mongo     = require('mongodb'),
     db        = 'facebook-test';
 
 describe('User', function(){
@@ -61,6 +62,17 @@ describe('User', function(){
     });
   });
 
+  describe('.authenticate', function(){
+    it('should return an authenticated user', function(done){
+      var data = {email:'nodeapptest+bob@gmail.com', password:'1234'};
+      User.authenticate(data, function(user){
+        expect(user).to.be.ok;
+        expect(user.unreadMessages).to.equal(1);
+        done();
+      });
+    });
+  });
+
   describe('#send', function(){
     it('should send a text message to a user', function(done){
       User.findById('000000000000000000000001', function(err, sender){
@@ -77,6 +89,16 @@ describe('User', function(){
         User.findById('000000000000000000000003', function(err, receiver){
           sender.send(receiver, {mtype:'email', message:'yo'}, function(err, response){
             expect(response.id).to.be.ok;
+            done();
+          });
+        });
+      });
+    });
+    it('should send an internal  message to a user', function(done){
+      User.findById('000000000000000000000001', function(err, sender){
+        User.findById('000000000000000000000003', function(err, receiver){
+          sender.send(receiver, {mtype:'internal', message:'yo'}, function(err, response){
+            expect(response._id).to.be.instanceof(Mongo.ObjectID);
             done();
           });
         });

@@ -2,7 +2,8 @@
 
 var bcrypt  = require('bcrypt'),
     _       = require('lodash'),
-    Mongo   = require('mongodb');
+    Mongo   = require('mongodb'),
+    Message = require('./message');
 
 function User(){
 }
@@ -31,7 +32,10 @@ User.authenticate = function(o, cb){
     if(!user){return cb();}
     var isOk = bcrypt.compareSync(o.password, user.password);
     if(!isOk){return cb();}
-    cb(user);
+    Message.countUnreadForUser(user._id, function(err2, count){
+      user.unreadMessages = count;
+      cb(user);
+    });
   });
 };
 
@@ -70,6 +74,7 @@ User.prototype.send = function(receiver, data, cb){
       sendEmail(this, receiver.email, data.message, cb);
       break;
     case 'internal':
+      sendInternal(this._id, receiver._id, data.message, cb);
   }
 };
 
@@ -100,3 +105,7 @@ function sendEmail(sender, to, body, cb){
   mg.messages().send(data, cb);
 }
 
+function sendInternal(fromId, toId, body, cb){
+  var m = new Message(fromId, toId, body);
+  m.save(cb);
+}

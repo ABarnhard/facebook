@@ -140,31 +140,6 @@ describe('users', function(){
         done();
       });
     });
-    it('should send an inmail message to recipient', function(done){
-      request(app)
-      .post('/message/000000000000000000000003')
-      .send('mtype=internal&message=hey')
-      .set('cookie', cookie)
-      .end(function(err, res){
-        expect(res.status).to.equal(302);
-        expect(res.headers.location).to.equal('/users/nodeapptest+john@gmail.com');
-        done();
-      });
-    });
-  });
-
-  describe('get /messages', function(){
-    it('should show messages page for logged in user', function(done){
-      request(app)
-      .get('/messages')
-      .set('cookie', cookie)
-      .end(function(err, res){
-        expect(res.status).to.equal(200);
-        expect(res.text).to.include('Sue');
-        expect(res.text).to.include('Message');
-        done();
-      });
-    });
   });
 
 });

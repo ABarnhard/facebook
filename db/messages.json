@@ -1,0 +1,25 @@
+{
+  "_id":{"$oid":"a00000000000000000000001"},
+  "sent":{"$date":477295200000},
+  "body":"Hi Bob, long time no see.\n You want to stop and get a drink sometime after work?",
+  "toId":{"$oid":"000000000000000000000001"},
+  "fromId" : {"$oid":"000000000000000000000002"},
+  "isRead":true
+}
+{
+  "_id":{"$oid":"a00000000000000000000002"},
+  "sent":{"$date":477295200000},
+  "body":"Hi Bob, following up on drinks after work. Give me a call any time, or message me with this sweet app.",
+  "toId":{"$oid":"000000000000000000000001"},
+  "fromId" : {"$oid":"000000000000000000000002"},
+  "isRead":false
+}
+{
+  "_id":{"$oid":"a00000000000000000000003"},
+  "sent":{"$date":477295200000},
+  "body":"Hi Sue, greate work on that project.\n If you don't get that promotion they are plain crazy.",
+  "toId":{"$oid":"000000000000000000000002"},
+  "fromId" : {"$oid":"000000000000000000000003"},
+  "isRead":true
+}
+
