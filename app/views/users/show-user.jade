@@ -18,25 +18,27 @@ block content
                     td= dispUser[prop]
           .row
             .col-xs-12
-              h4 Send Message:
-              form(role='form', method='post', action='/message/#{dispUser._id}')
-                .form-group
-                  .radio
-                    label
-                      input.radio(type="radio", name="mtype", value="text")
-                      span Text
-                  .radio
-                    label
-                      input.radio(type="radio", name="mtype", value="email")
-                      span Email
-                  .radio
-                    label
-                      input.radio(type="radio", name="mtype", value="internal")
-                      span In-mail
-                .form-group
-                  label(for='message') Message
-                  textarea.form-control#message(name='message')
-                button.btn.btn-success(type='submit') Send Message
+              .panel.panel-default
+                .panel-body
+                  h5 Send Message:
+                  form(role='form', method='post', action='/message/#{dispUser._id}')
+                    .form-group
+                      .radio
+                        label
+                          input.radio(type="radio", name="mtype", value="text")
+                          span Text
+                      .radio
+                        label
+                          input.radio(type="radio", name="mtype", value="email")
+                          span Email
+                      .radio
+                        label
+                          input.radio(type="radio", name="mtype", value="internal")
+                          span In-mail
+                    .form-group
+                      label(for='message') Message
+                      textarea.form-control#message(name='message')
+                    button.btn.btn-success(type='submit') Send Message
         .col-xs-6
           .row
             .col-xs-12

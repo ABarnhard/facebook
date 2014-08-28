@@ -76,13 +76,25 @@ module.exports = User;
 
 // Helper Functions
 function sendText(to, body, cb){
+  if(!to){return cb();}
+
+  var accountSid = process.env.TWSID,
+      authToken  = process.env.TWTOK,
+      from       = process.env.FROM,
+      client     = require('twilio')(accountSid, authToken);
+
+  client.messages.create({to:to, from:from, body:body}, cb);
+}
+/*
+function sendText(to, body, cb){
   // Twilio Credentials
-  var accountSid = 'AC7b037c98711ca2ed604b5c36ab5e1bf9',
+  var accountSid = 'AC37089f8a962a6517ad612beb5fdab204',
       authToken = require('../static/token/twilio-auth'),
       //require the Twilio module and create a REST client
-      client = require('twilio')(accountSid, authToken.token);
+      client = require('twilio')(accountSid, authToken.test);
   if(to){
     client.messages.create({to:to, from: '+13165411006', body: body}, cb);
   }
 }
+*/
 
