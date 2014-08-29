@@ -1,10 +1,11 @@
 'use strict';
 
-var Message = require('../models/message');
+var User   = require('../models/user'),
+    moment = require('moment');
 
 exports.index = function(req, res){
-  Message.find(res.locals.user._id, req.query, function(err, messages){
-    res.render('messages/index', {messages:messages, query:req.query});
+  User.fetchMessages(res.locals.user._id, req.query, function(err, messages){
+    res.render('messages/index', {messages:messages, query:req.query, moment:moment});
   });
 };
 

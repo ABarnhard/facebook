@@ -153,19 +153,5 @@ describe('users', function(){
     });
   });
 
-  describe('get /messages', function(){
-    it('should show messages page for logged in user', function(done){
-      request(app)
-      .get('/messages')
-      .set('cookie', cookie)
-      .end(function(err, res){
-        expect(res.status).to.equal(200);
-        expect(res.text).to.include('Sue');
-        expect(res.text).to.include('Message');
-        done();
-      });
-    });
-  });
-
 });
 

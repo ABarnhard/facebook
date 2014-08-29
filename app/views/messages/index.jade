@@ -13,10 +13,10 @@ block content
                 th Message
             tbody
               each message in messages
-                tr
+                tr(style="background-color:#{(message.isRead) ? 'white' : 'whitesmoke'};")
                   td: a(href='/users/#{message.fromEmail}')= message.fromName
-                  td= message.sent
-                  td= message.body
+                  td= moment(message.sent).format('MMM Do YY')
+                  td: a(href='/messages/#{message._id}')= message.body.substr(0, 10)
 
 block scripts
 

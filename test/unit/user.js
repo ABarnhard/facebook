@@ -73,6 +73,17 @@ describe('User', function(){
     });
   });
 
+  describe('.fetchMessages', function(){
+    it('should return all messages for a user', function(done){
+      var id = Mongo.ObjectID('000000000000000000000001');
+      User.fetchMessages(id, {}, function(err, messages){
+        expect(messages).to.have.length(2);
+        expect(messages[0].fromName).to.equal('Sue');
+        done();
+      });
+    });
+  });
+
   describe('#send', function(){
     it('should send a text message to a user', function(done){
       User.findById('000000000000000000000001', function(err, sender){

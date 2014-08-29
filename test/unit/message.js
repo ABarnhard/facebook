@@ -36,17 +36,6 @@ describe('Message', function(){
     });
   });
 
-  describe('.find', function(){
-    it('should return all messages for a user', function(done){
-      var id = Mongo.ObjectID('000000000000000000000001');
-      Message.find(id, {}, function(err, messages){
-        expect(messages).to.have.length(2);
-        expect(messages[0].fromName).to.equal('Sue');
-        done();
-      });
-    });
-  });
-
   describe('#save', function(){
     it('should save a message in the database', function(done){
       var from = Mongo.ObjectID(),

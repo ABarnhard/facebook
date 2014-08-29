@@ -3,7 +3,8 @@
 var bcrypt  = require('bcrypt'),
     _       = require('lodash'),
     Mongo   = require('mongodb'),
-    Message = require('./message');
+    Message = require('./message'),
+    async   = require('async');
 
 function User(){
 }
@@ -65,6 +66,14 @@ User.find = function(query, cb){
   User.collection.findOne(query, cb);
 };
 
+User.fetchMessages = function(userId, query, cb){
+  Message.find(userId, query, function(err, messages){
+    async.map(messages, addSenderInfo, function(err2, fullMessages){
+      cb(err2, fullMessages);
+    });
+  });
+};
+
 User.prototype.send = function(receiver, data, cb){
   switch(data.mtype){
     case 'text':
@@ -81,6 +90,17 @@ User.prototype.send = function(receiver, data, cb){
 module.exports = User;
 
 // Helper Functions
+
+function addSenderInfo(message, done){
+  User.findById(message.fromId, function(err, user){
+    // console.log(user);
+    message.fromName = user.name;
+    message.fromEmail = user.email;
+    // console.log(message);
+    done(null, message);
+  });
+}
+
 function sendText(to, body, cb){
   if(!to){return cb();}
 
