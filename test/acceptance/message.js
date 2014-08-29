@@ -42,5 +42,18 @@ describe('messages', function(){
     });
   });
 
+  describe('get /messages/messageId', function(){
+    it('should show an individual users message', function(done){
+      request(app)
+      .get('/messages/a00000000000000000000002')
+      .set('cookie', cookie)
+      .end(function(err, res){
+        expect(res.status).to.equal(200);
+        expect(res.text).to.include('drinks after work');
+        done();
+      });
+    });
+  });
+
 });
 

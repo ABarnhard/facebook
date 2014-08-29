@@ -1,5 +1,8 @@
 'use strict';
 
+var Mongo = require('mongodb'),
+    _     = require('lodash');
+
 function Message(fromId, toId, body){
   this.fromId = fromId;
   this.toId = toId;
@@ -19,8 +22,24 @@ Message.find = function(toId, query, cb){
   Message.collection.find(filter).sort(sort).toArray(cb);
 };
 
-Message.findOne = function(query, cb){
-  Message.collection.findOne(query, cb);
+Message.findOne = function(messageId, userId, cb){
+  var _id = Mongo.ObjectID(messageId);
+  Message.collection.findOne({_id:_id, toId:userId}, function(err, obj){
+    if(!obj){return cb();}
+
+    cb(err, _.create(Message.prototype, obj));
+  });
+};
+
+Message.read = function(messageId, userId, cb){
+  Message.findOne(messageId, userId, function(err, m){
+    if(!m){return cb();}
+
+    m.isRead = true;
+    m.save(function(){
+      cb(null, m);
+    });
+  });
 };
 
 Message.prototype.save = function(cb){

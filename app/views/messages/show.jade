@@ -1,0 +1,20 @@
+extends ../shared/template
+block content
+  h2 Message
+  .panel.panel-default
+    .panel-body
+      .row
+        .col-xs-12
+          .row.message-from
+            .col-xs-1 From:
+            .col-xs-3: a(href='/users/#{message.fromEmail}')= message.fromName
+            .col-xs-7
+          .row.message-sent
+            .col-xs-1 Sent:
+            .col-xs-3= moment(message.sent).format('MMM Do YY')
+            .col-xs-7
+          .row.message-text
+            .col-xs-12= message.body
+
+block scripts
+

@@ -74,6 +74,18 @@ User.fetchMessages = function(userId, query, cb){
   });
 };
 
+User.readMessage = function(messageId, userId, cb){
+  Message.read(messageId, userId, function(err, m){
+    if(!m){return cb();}
+
+    User.findById(m.fromId, function(err2, u){
+      m.fromName = u.name;
+      m.fromEmail = u.email;
+      cb(err2, m);
+    });
+  });
+};
+
 User.prototype.send = function(receiver, data, cb){
   switch(data.mtype){
     case 'text':

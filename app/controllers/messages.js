@@ -9,3 +9,13 @@ exports.index = function(req, res){
   });
 };
 
+exports.show = function(req, res){
+  User.readMessage(req.params.messageId, res.locals.user._id, function(err, message){
+    if(message){
+      res.render('messages/show', {message:message, moment:moment});
+    }else{
+      res.redirect('/messages');
+    }
+  });
+};
+

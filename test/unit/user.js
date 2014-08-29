@@ -84,6 +84,18 @@ describe('User', function(){
     });
   });
 
+  describe('.readMessage', function(){
+    it('should return a message and update it\'s isRead status', function(done){
+      var userId    = Mongo.ObjectID('000000000000000000000001'),
+          messageId = 'a00000000000000000000002';
+      User.readMessage(messageId, userId, function(err, message){
+        expect(message.isRead).to.equal(true);
+        expect(message.fromName).to.equal('Sue');
+        done();
+      });
+    });
+  });
+
   describe('#send', function(){
     it('should send a text message to a user', function(done){
       User.findById('000000000000000000000001', function(err, sender){
