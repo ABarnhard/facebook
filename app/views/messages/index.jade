@@ -9,7 +9,7 @@ block content
             thead
               tr
                 th From
-                th Date
+                th!= linkHelper.sort(query, 'Date')
                 th Message
             tbody
               each message in messages
