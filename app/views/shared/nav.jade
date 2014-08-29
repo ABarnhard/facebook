@@ -12,6 +12,7 @@
       ul.nav.navbar-nav.navbar-right
         if user
           li: a(href='/messages') Messages
+          li.unread= user.unreadMessages > 0 ? user.unreadMessages : null
           li: a(href='/users') Users
           li: a(href='/profile') Profile
           li

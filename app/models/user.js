@@ -16,7 +16,11 @@ Object.defineProperty(User, 'collection', {
 User.findById = function(id, cb){
   var _id = Mongo.ObjectID(id);
   User.collection.findOne({_id:_id}, function(err, obj){
-    cb(err, _.create(User.prototype, obj));
+    Message.countUnreadForUser(obj._id, function(err2, count){
+      obj.unreadMessages = count;
+      console.log('*******user from findById', obj);
+      cb(err, _.create(User.prototype, obj));
+    });
   });
 };
 
@@ -35,6 +39,7 @@ User.authenticate = function(o, cb){
     if(!isOk){return cb();}
     Message.countUnreadForUser(user._id, function(err2, count){
       user.unreadMessages = count;
+      console.log('*******user from authenticate', user);
       cb(user);
     });
   });
